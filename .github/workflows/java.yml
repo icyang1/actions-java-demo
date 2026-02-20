@@ -1,5 +1,27 @@
-public class Hello{
-public static void main(String[] args) {
-    System.out.println("Hello from GitHub Actions");
-}
-}
+name: Java CI Demo
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Compile Java program
+      run: javac Hello.java
+
+    - name: Run program
+      run: java Hello
